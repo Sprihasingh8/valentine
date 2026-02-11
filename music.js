@@ -1,38 +1,34 @@
 let bgMusic;
 
-// Restore music on every page load
 window.addEventListener("load", () => {
-  bgMusic = document.getElementById("bgMusic");
-  if (!bgMusic) return;
-
-  bgMusic.volume = 0.35;
-  bgMusic.preload = "auto";
-
+  const music = document.getElementById("bgMusic");
+  if (!music) return;
 
   // Restore time
   const savedTime = localStorage.getItem("musicTime");
-  if (savedTime) {
-    bgMusic.currentTime = parseFloat(savedTime);
-  }
+  if (savedTime) music.currentTime = parseFloat(savedTime);
 
   // If music was playing before, continue
-  if (localStorage.getItem("musicPlaying") === "yes") {
-    bgMusic.play().catch(() => {});
+  const wasPlaying = localStorage.getItem("musicPlaying");
+  if (wasPlaying === "true") {
+    music.play().catch(() => {});
   }
 
-  // Save time every second
+  // Save time continuously
   setInterval(() => {
-    if (!bgMusic.paused) {
-      localStorage.setItem("musicTime", bgMusic.currentTime);
+    if (!music.paused) {
+      localStorage.setItem("musicTime", music.currentTime);
     }
   }, 200);
 });
 
-// Start music ONLY when Begin button clicked
 function startMusic() {
-  if (!bgMusic) bgMusic = document.getElementById("bgMusic");
+  const music = document.getElementById("bgMusic");
+  if (!music) return;
 
-  bgMusic.play().then(() => {
-    localStorage.setItem("musicPlaying", "yes");
+  music.play().then(() => {
+    localStorage.setItem("musicPlaying", "true");
   }).catch(() => {});
 }
+
+
