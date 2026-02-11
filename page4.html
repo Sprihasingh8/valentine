@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Game 🎮</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="music.js" defer></script>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="container">
+    
+
+    <div class="card center">
+      <h2 style="font-size:1.9rem;">Memory Game 🎮</h2>
+      <p style="margin-top:10px; opacity:0.9;">
+        Match all pairs to unlock the next page 😈💘
+      </p>
+
+      <div style="margin-top:10px; font-weight:800;">
+        Matches: <span id="matches">0</span> / 6
+      </div>
+
+      <div class="game-grid" id="grid"></div>
+
+      <div style="margin-top:20px;">
+        <button class="btn" id="continueBtn" disabled style="opacity:0.6;">
+          🔒 Finish the game to continue
+        </button>
+      </div>
+    </div>
+    <div class="backbar">
+      <button class="btn secondary" onclick="history.back()">⬅ Back</button>
+      <!-- <button class="btn secondary" onclick="toggleMusic()">🎵 Play / Pause</button> -->
+    </div>
+  </div>
+
+  <script>
+    const hearts = document.getElementById("hearts");
+    const emojis = ["💖","💘","💗","💓","💕","💞"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100 + "vw";
+      h.style.animationDuration = (6 + Math.random()*5) + "s";
+      h.style.fontSize = (14 + Math.random()*20) + "px";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 12000);
+    }
+    setInterval(spawnHeart, 520);
+
+    // Memory Game
+    const symbols = ["💖","💘","💗","💓","💕","💞"];
+    const deck = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+
+    const grid = document.getElementById("grid");
+    const matchesEl = document.getElementById("matches");
+    const continueBtn = document.getElementById("continueBtn");
+
+    let first = null;
+    let second = null;
+    let lock = false;
+    let matches = 0;
+
+    function createCard(symbol, index) {
+      const div = document.createElement("div");
+      div.className = "game-card";
+      div.textContent = "❓";
+      div.dataset.symbol = symbol;
+      div.dataset.index = index;
+      div.dataset.flipped = "false";
+      div.dataset.matched = "false";
+
+      div.addEventListener("click", () => handleFlip(div));
+      return div;
+    }
+
+    function handleFlip(card) {
+      if (lock) return;
+      if (card.dataset.matched === "true") return;
+      if (card.dataset.flipped === "true") return;
+
+      card.textContent = card.dataset.symbol;
+      card.dataset.flipped = "true";
+
+      if (!first) {
+        first = card;
+        return;
+      }
+
+      second = card;
+      lock = true;
+
+      // Check match
+      if (first.dataset.symbol === second.dataset.symbol) {
+        first.dataset.matched = "true";
+        second.dataset.matched = "true";
+        first.classList.add("matched");
+        second.classList.add("matched");
+
+        matches++;
+        matchesEl.textContent = matches;
+
+        first = null;
+        second = null;
+        lock = false;
+
+        if (matches === 6) {
+          continueBtn.disabled = false;
+          continueBtn.style.opacity = "1";
+          continueBtn.textContent = "💘 You did it! Continue!";
+          continueBtn.onclick = () => location.href = "page5.html";
+        }
+      } else {
+        setTimeout(() => {
+          first.textContent = "❓";
+          second.textContent = "❓";
+          first.dataset.flipped = "false";
+          second.dataset.flipped = "false";
+          first = null;
+          second = null;
+          lock = false;
+        }, 700);
+      }
+    }
+
+    deck.forEach((sym, i) => grid.appendChild(createCard(sym, i)));
+  </script>
+</body>
+</html>

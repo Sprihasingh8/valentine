@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You 💘</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="music.js" defer></script>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="container landing">
+    <header>
+      <div>
+        <div class="title">A Little Valentine Journey 💖</div>
+        <div class="subtitle">Made with love, giggles, and a tiny bit of chaos 😌</div>
+      </div>
+      <!-- <div class="music-btn-wrap">
+        <button class="btn secondary" onclick="toggleMusic()">🎵 Play / Pause</button>
+      </div> -->
+</header>
+    </header>
+
+    <div class="card center">
+      <h1 style="font-size:2.2rem;">Hey You 😍</h1>
+      <p style="margin-top:14px; font-size:1.05rem; opacity:0.9;">
+        This is only for you my Love!!!  
+        Click the button below… and let’s begin 💌
+      </p>
+
+      <div style="margin-top:18px;">
+        <a href="page1.html" class="btn" onclick="startMusic()">
+          💘 Begin Our Journey
+        </a>
+      </div>
+
+      <!-- <div class="small-note">
+        Tip: press Play once so music continues on every page 🎶
+      </div> -->
+    </div>
+  </div>
+
+  <script>
+    // floating hearts generator
+    const hearts = document.getElementById("hearts");
+    const emojis = ["💖","💘","💗","💓","💕","💞"];
+
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100 + "vw";
+      h.style.animationDuration = (6 + Math.random()*5) + "s";
+      h.style.fontSize = (14 + Math.random()*20) + "px";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 12000);
+    }
+    setInterval(spawnHeart, 450);
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose 💘</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="music.js" defer></script>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="container">
+    
+
+    <div class="card center">
+      <h2 style="font-size:1.9rem;">Okay… your turn 😌</h2>
+      <p style="margin-top:10px; opacity:0.9;">
+        Pick a card. No wrong answers. Only love 💖
+      </p>
+
+      <div class="grid cols-3">
+        <div class="choice-card" onclick="location.href='page2.html'">
+          <div class="choice-emoji">💖</div>
+          <div class="choice-title">Why I Love You</div>
+          <div class="choice-desc">Tap to reveal 4 reasons that melt me.</div>
+        </div>
+
+        <div class="choice-card" onclick="location.href='page3.html'">
+          <div class="choice-emoji">💌</div>
+          <div class="choice-title">Love Letter</div>
+          <div class="choice-desc">A sweet little note… from me to you.</div>
+        </div>
+
+        <div class="choice-card" onclick="location.href='page4.html'">
+          <div class="choice-emoji">🎮</div>
+          <div class="choice-title">Play a Game</div>
+          <div class="choice-desc">A matching game you MUST beat to continue 😈</div>
+        </div>
+      </div>
+    </div>
+    <div class="backbar">
+      <button class="btn secondary" onclick="history.back()">⬅ Back</button>
+      <!-- <button class="btn secondary" onclick="toggleMusic()">🎵 Play / Pause</button> -->
+    </div>
+  </div>
+
+  <script>
+    const hearts = document.getElementById("hearts");
+    const emojis = ["💖","💘","💗","💓","💕","💞"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100 + "vw";
+      h.style.animationDuration = (6 + Math.random()*5) + "s";
+      h.style.fontSize = (14 + Math.random()*20) + "px";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 12000);
+    }
+    setInterval(spawnHeart, 520);
+  </script>
+</body>
+</html>

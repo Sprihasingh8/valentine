@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why I Love You 💖</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="music.js" defer></script>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="container">
+    
+
+    <div class="card center">
+      <h2 style="font-size:1.9rem;">Why I Love You 💖</h2>
+      <p style="margin-top:10px; opacity:0.9;">
+        Tap each card to flip it 😍
+      </p>
+
+      <div class="grid cols-4">
+        <div class="flip" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <h3>😊 Your Smile</h3>
+              <p>Tap to reveal</p>
+            </div>
+            <div class="flip-face flip-back">
+              <p>Your smile makes my whole day feel lighter.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <h3>😂 Your Laugh</h3>
+              <p>Tap to reveal</p>
+            </div>
+            <div class="flip-face flip-back">
+              <p>Your laugh is my favorite sound in the universe.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <h3>🌷 Your Kindness</h3>
+              <p>Tap to reveal</p>
+            </div>
+            <div class="flip-face flip-back">
+              <p>You’re gentle, warm, and you make people feel safe.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <h3>🔥 Your Spirit</h3>
+              <p>Tap to reveal</p>
+            </div>
+            <div class="flip-face flip-back">
+              <p>You’re strong, beautiful, and you inspire me constantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;">
+        <a class="btn" href="page3.html">💌 Continue…</a>
+
+      </div>
+    </div>
+    <div class="backbar">
+      <button class="btn secondary" onclick="history.back()">⬅ Back</button>
+      <!-- <button class="btn secondary" onclick="toggleMusic()">🎵 Play / Pause</button> -->
+    </div>
+  </div>
+
+  <script>
+    const hearts = document.getElementById("hearts");
+    const emojis = ["💖","💘","💗","💓","💕","💞"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100 + "vw";
+      h.style.animationDuration = (6 + Math.random()*5) + "s";
+      h.style.fontSize = (14 + Math.random()*20) + "px";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 12000);
+    }
+    setInterval(spawnHeart, 520);
+  </script>
+</body>
+</html>

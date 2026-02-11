@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YAY 💖</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="music.js" defer></script>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="container">
+    <div class="backbar">
+      <a class="btn secondary" href="index.html">🏠 Home</a>
+      <!-- <button class="btn secondary" onclick="toggleMusic()">🎵 Play / Pause</button> -->
+    </div>
+
+    <div class="card center">
+      <div class="sparkle">🎆</div>
+      <h1 style="font-size:2.4rem; margin-top:10px;">YAAAAAY!!! 💖</h1>
+      <p style="margin-top:14px; font-size:1.1rem; opacity:0.92;">
+        Congratulations 🎉  
+        You officially made me the happiest person alive 😭💘
+      </p>
+
+      <p style="margin-top:14px; font-size:1.05rem; opacity:0.9;">
+        Happy Valentine’s Day, my love 💕  
+        Now come here… I deserve a hug 😌
+      </p>
+
+      <div style="margin-top:20px;">
+        <a class="btn" href="page1.html">🔁 Replay Journey</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hearts = document.getElementById("hearts");
+    const emojis = ["🎆","✨","💖","💘","💗","💓","💕","💞"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100 + "vw";
+      h.style.animationDuration = (4 + Math.random()*4) + "s";
+      h.style.fontSize = (14 + Math.random()*26) + "px";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 12000);
+    }
+    setInterval(spawnHeart, 260);
+  </script>
+</body>
+</html>
