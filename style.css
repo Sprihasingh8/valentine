@@ -21,15 +21,15 @@ html, body {
 
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(135deg, var(--bg1), var(--bg2));
   color: var(--text);
-  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 20px 12px;
   box-sizing: border-box;
+  margin: 0;
 
 }
 
@@ -80,6 +80,12 @@ header {
   width: 100%;
   max-width: 900px;
 }
+
+.scroll-page {
+  align-items: flex-start; /* instead of center */
+  overflow-y: auto;
+}
+
 
 .center {
   text-align: center;
